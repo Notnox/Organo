@@ -1,0 +1,15 @@
+.footer {
+    background-color: #6278F7;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    &__redes {
+        margin: 8px;
+    }
+    &__logo {
+        margin: 24px;
+    }
+    &__label {
+        color: white;
+    }
+}
