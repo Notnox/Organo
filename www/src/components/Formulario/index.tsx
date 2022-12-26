@@ -1,58 +1,49 @@
 import Botao from 'components/Botao';
 import CampoTexto from 'components/CampoTexto';
 import ListaSuspensa from 'components/ListaSuspensa';
-import { formularioCadastro } from 'data/FormularioCadastro';
-import { times } from 'data/Times';
 import { FormEvent } from 'react';
-import { IColaborador } from 'types/IColaborador';
-import { CustomForm } from 'types/IFormularioCadastro';
 import styles from './Formulario.module.scss';
+import { CustomForm, IFormularioCadastro } from 'types/IFormularioCadastro';
+import { ITime } from 'types/ITime';
 
 interface Props {
-    cadastraColaborador: (colaborador: IColaborador) => void;
+    aoCadastrar: (evento: FormEvent<CustomForm>) => void;
+    formulario: IFormularioCadastro[];
+    titulo: string;
+    listaSuspensa?: ITime[];
+    textoBotao: string;
+    tituloListaSuspensa?: string;
 }
 
-const Formulario: React.FC<Props> = ({ cadastraColaborador }) => {
-    const cadastrarColaborador = (evento: FormEvent<CustomForm>) => {
-        evento.preventDefault();
-        const target = evento.currentTarget.elements;
-        const colaborador: IColaborador = {
-            nome: target.nome.value,
-            cargo: target.cargo.value,
-            imagem: target.imagem.value,
-            time: target.time.value
-        };
-        cadastraColaborador(colaborador);
-        target.nome.value = '';
-        target.cargo.value = '';
-        target.imagem.value = '';
-        target.time.value = 'Selecione seu time';
-        alert('Colaborador cadastrado com sucesso!');
-    }
+const Formulario: React.FC<Props> = 
+    ({ aoCadastrar, formulario, titulo, listaSuspensa, textoBotao, tituloListaSuspensa }) => {
     return (
         <section className={styles.formulario}>
             <form 
                 className={styles.formulario__form}
-                onSubmit={cadastrarColaborador}
+                onSubmit={aoCadastrar}
             >
-                <h2>Preencha os dados para criar o card colaborador.</h2>
-                {formularioCadastro.map((item, index) => (
+                <h2>{titulo}</h2>
+                {formulario.map((item, index) => (
                     <CampoTexto 
                         key={index}
                         id={item.id}
                         nome={item.nome} 
                         placeholder={item.placeholder}
                         required={item.required}
+                        tipo={item.type}
                     />
                 ))}
-                <ListaSuspensa 
-                    id='time'
-                    label='Time' 
-                    lista={times.map(time => time.nome)}
-                    required={true}
-                />
+                { listaSuspensa &&
+                    <ListaSuspensa 
+                        id='listaSuspensa'
+                        label={tituloListaSuspensa ? tituloListaSuspensa : ''}
+                        lista={listaSuspensa.map(time => time.nome)}
+                        required={true}
+                    />
+                }
                 <Botao>
-                    Criar card
+                    {textoBotao}
                 </Botao>
             </form>
         </section>

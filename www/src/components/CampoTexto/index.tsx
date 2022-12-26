@@ -5,9 +5,10 @@ interface Props {
     placeholder: string;
     required?: boolean;
     id: string;
+    tipo: string;
 }
 
-const CampoTexto: React.FC<Props> = ({nome, placeholder, required, id}) => {
+const CampoTexto: React.FC<Props> = ({nome, placeholder, required, id, tipo}) => {
     return (
         <>
             <div className={styles.campoTexto}>
@@ -17,6 +18,7 @@ const CampoTexto: React.FC<Props> = ({nome, placeholder, required, id}) => {
                     placeholder={placeholder}
                     required={required}
                     id={id}
+                    type={tipo}
                 />
             </div>
         </>

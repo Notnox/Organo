@@ -1,6 +1,15 @@
 .time {
+    position: relative;
     text-align: center;
     padding: 32px;
+    background-image: url('../../../public/assets/img/fundo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    &__inputColor {
+        position: absolute;
+        top: 20px;
+        right: 50px;
+    }
     &__titulo {
         font-size: 32px;
         border-bottom: 4px solid;
@@ -14,3 +23,4 @@
         flex-wrap: wrap;
     }
 }
+

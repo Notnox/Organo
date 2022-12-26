@@ -1,5 +1,5 @@
 export interface ITime {
-    id: number;
+    id: string;
     nome: string;
     corPrimaria: string;
     corSegundaria: string;
